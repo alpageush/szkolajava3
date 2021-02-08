@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Font;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -379,7 +380,11 @@ public class okno extends javax.swing.JFrame {
     }//GEN-LAST:event_przycisk_zamknijActionPerformed
 
     private void przycisk_zapiszActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_przycisk_zapiszActionPerformed
-        save();
+        try {
+            save();
+        } catch (IOException ex) {
+            Logger.getLogger(okno.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_przycisk_zapiszActionPerformed
 
     private void kolor_czerwonyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kolor_czerwonyActionPerformed
@@ -387,7 +392,11 @@ public class okno extends javax.swing.JFrame {
     }//GEN-LAST:event_kolor_czerwonyActionPerformed
 
     private void menu_zapiszActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_zapiszActionPerformed
-        save();
+        try {
+            save();
+        } catch (IOException ex) {
+            Logger.getLogger(okno.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_menu_zapiszActionPerformed
 
     private void kolor_zielonyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_kolor_zielonyActionPerformed
@@ -427,14 +436,22 @@ public class okno extends javax.swing.JFrame {
     }//GEN-LAST:event_czcionka_comicActionPerformed
 
     private void menu_wczytajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menu_wczytajActionPerformed
-        open();
+        try {
+            open();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(okno.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_menu_wczytajActionPerformed
 
     private void przycisk_otworzActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_przycisk_otworzActionPerformed
-        open();
+        try {
+            open();
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(okno.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_przycisk_otworzActionPerformed
 
-    void open() {
+    void open() throws FileNotFoundException {
         File plik = new File(path + "text.txt");
         if(!plik.exists()) return;
         Scanner sc = new Scanner(plik);
@@ -442,7 +459,7 @@ public class okno extends javax.swing.JFrame {
         pole_tekstowe.setText(sc.toString());
     }
     
-    void save() {
+    void save() throws IOException {
         File plik = new File(path + "text.txt");
         FileWriter fs = new FileWriter(plik);
         if(plik.exists()) {
